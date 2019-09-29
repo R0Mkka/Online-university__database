@@ -1,0 +1,11 @@
+USE ou_main;
+
+CREATE TABLE themes (
+	themeId TINYINT AUTO_INCREMENT PRIMARY KEY,
+    themeName VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE languages (
+	languageId TINYINT AUTO_INCREMENT PRIMARY KEY,
+    languageName VARCHAR(30) NOT NULL
+);
