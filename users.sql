@@ -5,6 +5,7 @@ DROP TABLE users;
 CREATE TABLE users (
 	userId INT AUTO_INCREMENT,
     roleId TINYINT NOT NULL,
+    userName NVARCHAR(30) NOT NULL UNIQUE,
     firstName NVARCHAR(30) NOT NULL,
     lastName NVARCHAR(30) NOT NULL,
     educationalInstitution NVARCHAR(60) NOT NULL,
@@ -30,7 +31,10 @@ CREATE TABLE users (
 );
 
 ALTER TABLE users
-ADD CONSTRAINT unique_constraint UNIQUE(email);
+ADD CONSTRAINT unique_username_constraint UNIQUE(userName);
+
+ALTER TABLE users
+ADD COLUMN userName NVARCHAR(30) NOT NULL;
 
 ALTER TABLE users
 MODIFY registeredAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP;

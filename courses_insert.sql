@@ -6,9 +6,9 @@ INSERT INTO courses (
     courseCode
 )
 VALUES (
-    'Math',
+    'Biology',
     'Some course description...',
-    '111'
+    '222'
 );
 
 INSERT INTO course_items (
@@ -26,3 +26,7 @@ SELECT
 	*
 FROM
 	courses;
+    
+DELETE
+FROM courses
+WHERE courseId = 2;

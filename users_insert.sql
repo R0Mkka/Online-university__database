@@ -2,6 +2,7 @@ USE ou_main;
 
 INSERT INTO users (
     roleId,
+    userName,
     firstName,
     lastName,
     educationalInstitution,
@@ -10,6 +11,7 @@ INSERT INTO users (
 )
 VALUES (
     2,
+    'R0Mkka',
     'Roman',
     'Alexanov',
     'Polotsk State University',
@@ -18,6 +20,7 @@ VALUES (
 ),
 (
     2,
+    'hekor',
     'Stas',
     'Balan',
     'Polotsk State University',
@@ -29,6 +32,14 @@ SELECT
 	*
 FROM
 	users;
+    
+SELECT
+	*
+FROM
+	users
+LEFT JOIN
+	roles 
+USING(roleId);
     
 DELETE 
 FROM users
