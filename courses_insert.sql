@@ -3,12 +3,14 @@ USE ou_main;
 INSERT INTO courses (
     courseName,
     courseDescription,
-    courseCode
+    courseCode,
+    courseOwnerId
 )
 VALUES (
     'Biology',
     'Some course description...',
-    '222'
+    '222',
+    23
 );
 
 INSERT INTO course_items (
@@ -29,4 +31,4 @@ FROM
     
 DELETE
 FROM courses
-WHERE courseId = 2;
+WHERE courseId > 0;
