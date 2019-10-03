@@ -27,7 +27,13 @@ CREATE TABLE users (
         
 	CONSTRAINT fk_languageId
     FOREIGN KEY (languageId)
-		REFERENCES languages(languageId)
+		REFERENCES languages(languageId),
+        
+	CONSTRAINT fk_account_image_id
+    FOREIGN KEY (accountImageId)
+		REFERENCES account_images(imageId)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 ALTER TABLE users
@@ -41,7 +47,9 @@ MODIFY registeredAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
 describe users;
 
-CREATE TABLE avatar_image (
+DROP TABLE avatar_image;
+
+CREATE TABLE account_images (
 	imageId INT AUTO_INCREMENT PRIMARY KEY,
     imageLabel NVARCHAR(60) NOT NULL,
     imagePath VARCHAR(100) NOT NULL,
