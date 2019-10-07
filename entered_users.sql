@@ -42,6 +42,14 @@ CREATE TABLE entered_users_archive (
 );
 
 SELECT
+	users.userId, statusId, CONCAT(users.firstName, ' ', users.lastName) as fullName
+FROM
+	users
+LEFT JOIN
+	entered_users
+ON users.userId = entered_users.enteredUserId;
+
+SELECT
 	*
 FROM
 	entered_users;
