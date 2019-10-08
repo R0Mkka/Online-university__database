@@ -7,6 +7,7 @@ CREATE TABLE courses (
 	courseId INT AUTO_INCREMENT,
     courseName VARCHAR(100) NOT NULL,
     courseDescription TEXT NOT NULL,
+    courseGroupName NVARCHAR(50) NOT NULL DEFAULT 'Без группы',
     courseCode VARCHAR(20) NOT NULL UNIQUE,
     courseOwnerId INT NOT NULL,
     addedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -21,6 +22,9 @@ CREATE TABLE courses (
 
 ALTER TABLE courses
 ADD COLUMN courseOwnerId INT NOT NULL;
+
+ALTER TABLE courses
+ADD COLUMN courseGroupName NVARCHAR(50) NOT NULL DEFAULT 'Без группы';
 
 ALTER TABLE courses
 ADD CONSTRAINT fk_course_owner_id
@@ -44,3 +48,5 @@ CREATE TABLE course_items (
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+SELECT * FROM courses;
