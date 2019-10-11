@@ -35,10 +35,13 @@ ADD CONSTRAINT fk_course_owner_id
 
 DESCRIBE courses;
 
+DROP TABLE course_items;
+
 CREATE TABLE course_items (
 	courseItemId BIGINT AUTO_INCREMENT,
     courseItemTitle NVARCHAR(100) NOT NULL,
     courseItemText TEXT NOT NULL,
+    addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     courseId INT NOT NULL,
     PRIMARY KEY(courseItemId),
     
