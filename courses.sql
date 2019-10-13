@@ -10,6 +10,7 @@ CREATE TABLE courses (
     courseGroupName NVARCHAR(50) NOT NULL DEFAULT 'Без группы',
     courseCode VARCHAR(20) NOT NULL UNIQUE,
     courseOwnerId INT NOT NULL,
+    chatId INT NOT NULL,
     addedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (courseId),
     
@@ -17,8 +18,22 @@ CREATE TABLE courses (
     FOREIGN KEY (courseOwnerId)
 		REFERENCES users(userId)
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+	
+    CONSTRAINT courses_chatId
+	FOREIGN KEY (chatId)
+		REFERENCES chat(chatId)
+		ON UPDATE CASCADE
 );
+
+ALTER TABLE courses
+ADD COLUMN chatId INT NOT NULL DEFAULT 1;
+
+ALTER TABLE courses
+ADD CONSTRAINT courses_chatId
+	FOREIGN KEY (chatId)
+		REFERENCES chat(chatId)
+		ON UPDATE CASCADE;
 
 ALTER TABLE courses
 ADD COLUMN courseOwnerId INT NOT NULL;
@@ -53,3 +68,7 @@ CREATE TABLE course_items (
 );
 
 SELECT * FROM courses;
+
+DELETE
+FROM courses
+WHERE courseId = 17;

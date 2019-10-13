@@ -2,6 +2,7 @@ USE ou_main;
 
 CREATE TABLE chat (
 	chatId INT NOT NULL AUTO_INCREMENT,
+    imageId INT NOT NULL DEFAULT 1,
     creatorId INT NOT NULL,
     chatName NVARCHAR(110) DEFAULT 'Новый чат',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -17,6 +18,9 @@ CREATE TABLE chat (
 
 ALTER TABLE chat
 ADD COLUMN chatName NVARCHAR(110) DEFAULT 'Новый чат';
+
+ALTER TABLE chat
+ADD COLUMN imageId INT NOT NULL DEFAULT 1;
 
 CREATE TABLE chat_user (
 	chatId INT NOT NULL,
@@ -82,3 +86,12 @@ CREATE TABLE message_status (
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+select * from chat;
+
+INSERT INTO chat(creatorId)
+VALUES (27);
+
+DELETE
+FROM chat
+WHERE chatId = 7;
