@@ -94,4 +94,4 @@ VALUES (27);
 
 DELETE
 FROM chat
-WHERE chatId = 7;
+WHERE chatId = 9;

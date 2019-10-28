@@ -26,6 +26,13 @@ CREATE TABLE courses (
 		ON UPDATE CASCADE
 );
 
+CREATE TRIGGER after_course_delete
+AFTER DELETE
+   ON courses FOR EACH ROW
+   DELETE
+   FROM chat
+   WHERE chatId = OLD.chatId;
+
 ALTER TABLE courses
 ADD COLUMN chatId INT NOT NULL DEFAULT 1;
 
@@ -71,4 +78,4 @@ SELECT * FROM courses;
 
 DELETE
 FROM courses
-WHERE courseId = 17;
+WHERE courseId = 19;
