@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS courses (
     courseName NVARCHAR(100) NOT NULL,
     courseGroupName NVARCHAR(30),
     courseDescription TEXT NOT NULL,
-    courseCode VARCHAR(20),
+    courseCode VARCHAR(20) NOT NULL,
     addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
     PRIMARY KEY (courseId, courseDataId),
