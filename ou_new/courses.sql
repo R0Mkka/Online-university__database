@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS courses (
 	courseId INT NOT NULL AUTO_INCREMENT,
     courseDataId INT NOT NULL,
     courseOwnerId INT NOT NULL,
+    chatId INT NOT NULL,
     courseName NVARCHAR(100) NOT NULL,
     courseGroupName NVARCHAR(30),
     courseDescription TEXT NOT NULL,
@@ -39,7 +40,12 @@ CREATE TABLE IF NOT EXISTS courses (
     FOREIGN KEY (courseOwnerId)
     REFERENCES users(userId)
 		ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+        
+	CONSTRAINT fk_COURSES_chatId
+    FOREIGN KEY (chatId)
+    REFERENCES chats(chatId)
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS courses_items (
@@ -84,3 +90,13 @@ CREATE TABLE IF NOT EXISTS users_courses (
 		ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+-- TABLES ALTERS
+ALTER TABLE courses
+ADD COLUMN chatId INT NOT NULL;
+
+ALTER TABLE courses
+ADD CONSTRAINT fk_COURSES_chatId
+    FOREIGN KEY (chatId)
+    REFERENCES chats(chatId)
+		ON UPDATE CASCADE;
