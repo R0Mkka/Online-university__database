@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS courses_color_palettes (
 );
 
 CREATE TABLE IF NOT EXISTS courses_data (
-	courseDataId INT NOT NULL PRIMARY KEY,
+	courseDataId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     coursePictureId SMALLINT,
     courseColorPaletteId SMALLINT,
     courseMode BOOLEAN DEFAULT TRUE
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS courses (
     courseName NVARCHAR(100) NOT NULL,
     courseGroupName NVARCHAR(30),
     courseDescription TEXT NOT NULL,
-    courseCode VARCHAR(20) NOT NULL,
+    courseCode VARCHAR(20) NOT NULL UNIQUE,
     addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
     PRIMARY KEY (courseId, courseDataId),
