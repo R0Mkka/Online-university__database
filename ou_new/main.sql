@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS users_entries (
     enteredAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     leftAt TIMESTAMP,
     
-    PRIMARY KEY(userEntryId, userId),
+    PRIMARY KEY(userEntryId),
     
 	CONSTRAINT fk_USERS_ENTRIES_userId
     FOREIGN KEY (userId)

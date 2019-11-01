@@ -49,25 +49,28 @@ CREATE TABLE IF NOT EXISTS users_chats (
 );
 
 CREATE TABLE IF NOT EXISTS messages_statuses (
-	messageStatusId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    isRead BOOLEAN DEFAULT FALSE
+	messageStatusId BIGINT NOT NULL AUTO_INCREMENT,
+    messageId BIGINT NOT NULL PRIMARY KEY,
+    isRead BOOLEAN DEFAULT FALSE,
+    
+    PRIMARY KEY (messageStatusId, messageId),
+    
+    CONSTRAINT fk_MESSAGE_STATUSES_messageId
+    FOREIGN KEY (messageId)
+    REFERENCES messages(messageId)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS messages (
 	messageId BIGINT NOT NULL AUTO_INCREMENT,
-    messageStatusId BIGINT NOT NULL,
     chatId INT NOT NULL,
     userId INT NOT NULL,
     userEntryId BIGINT NOT NULL,
     messageText TEXT NOT NULL,
     sentAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
-    PRIMARY KEY(messageId, messageStatusId),
-    
-    CONSTRAINT fk_MESSAGES_messageStatusId
-    FOREIGN KEY (messageStatusId)
-    REFERENCES messages_statuses(messageStatusId)
-		ON UPDATE CASCADE,
+    PRIMARY KEY(messageId),
         
 	CONSTRAINT fk_MESSAGES_chatId
     FOREIGN KEY (chatId)
