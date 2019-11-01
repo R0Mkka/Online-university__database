@@ -88,3 +88,10 @@ CREATE TABLE IF NOT EXISTS messages (
     REFERENCES users_entries(userEntryId)
 		ON UPDATE CASCADE
 );
+
+CREATE TRIGGER after_message_insert
+AFTER INSERT
+	ON messages FOR EACH ROW
+    INSERT INTO messages_statuses (messageId)
+    VALUES (NEW.messageId);
+    
