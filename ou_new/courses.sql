@@ -91,12 +91,9 @@ CREATE TABLE IF NOT EXISTS users_courses (
         ON DELETE CASCADE
 );
 
--- TABLES ALTERS
-ALTER TABLE courses
-ADD COLUMN chatId INT NOT NULL;
-
-ALTER TABLE courses
-ADD CONSTRAINT fk_COURSES_chatId
-    FOREIGN KEY (chatId)
-    REFERENCES chats(chatId)
-		ON UPDATE CASCADE;
+CREATE TRIGGER after_course_delete
+AFTER DELETE
+   ON courses FOR EACH ROW
+   DELETE
+   FROM chats
+   WHERE chatId = OLD.chatId;
