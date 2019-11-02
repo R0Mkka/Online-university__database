@@ -96,9 +96,16 @@ CREATE TABLE IF NOT EXISTS users_courses (
         ON DELETE CASCADE
 );
 
-CREATE TRIGGER after_course_delete
+CREATE TRIGGER remove_chat_after_course_delete
 AFTER DELETE
    ON courses FOR EACH ROW
    DELETE
    FROM chats
    WHERE chatId = OLD.chatId;
+   
+CREATE TRIGGER remove_course_data_after_course_delete
+AFTER DELETE
+   ON courses FOR EACH ROW
+   DELETE
+   FROM courses_data
+   WHERE courseDataId = OLD.courseDataId;
