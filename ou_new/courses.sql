@@ -28,13 +28,12 @@ CREATE TABLE IF NOT EXISTS courses (
     courseCode VARCHAR(20) NOT NULL UNIQUE,
     addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
-    PRIMARY KEY (courseId, courseDataId),
+    PRIMARY KEY (courseId),
     
     CONSTRAINT fk_COURSES_courseDataId
     FOREIGN KEY (courseDataId)
     REFERENCES courses_data(courseDataId)
-		ON UPDATE CASCADE
-        ON DELETE CASCADE,
+		ON UPDATE CASCADE,
     
     CONSTRAINT fk_COURSES_courseOwnerId
     FOREIGN KEY (courseOwnerId)
