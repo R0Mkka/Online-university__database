@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS courses (
 CREATE TABLE IF NOT EXISTS courses_items (
 	courseItemId INT NOT NULL AUTO_INCREMENT,
     courseId INT NOT NULL,
-    courseDataId INT NOT NULL,
     creatorId INT NOT NULL,
     courseItemTitle NVARCHAR(60) NOT NULL,
     courseItemTextContent TEXT NOT NULL,
@@ -60,12 +59,6 @@ CREATE TABLE IF NOT EXISTS courses_items (
     CONSTRAINT fk_COURSES_ITEMS_courseId
     FOREIGN KEY (courseId)
     REFERENCES courses(courseId)
-		ON UPDATE CASCADE
-        ON DELETE CASCADE,
-        
-	CONSTRAINT fk_COURSES_ITEMS_courseDataId
-    FOREIGN KEY (courseDataId)
-    REFERENCES courses_data(courseDataId)
 		ON UPDATE CASCADE
         ON DELETE CASCADE,
         
