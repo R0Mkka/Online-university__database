@@ -2,8 +2,11 @@ USE online_university;
 
 CREATE TABLE IF NOT EXISTS chats_images (
 	chatImageId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    label NVARCHAR(50) NOT NULL,
     path VARCHAR(100) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    originalName NVARCHAR(50) NOT NULL,
+    mimeType VARCHAR(35) NOT NULL,
+    size INT NOT NULL,
     addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
