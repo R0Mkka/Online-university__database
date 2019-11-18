@@ -51,20 +51,6 @@ CREATE TABLE IF NOT EXISTS users_chats (
         ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS messages_statuses (
-	messageStatusId BIGINT NOT NULL AUTO_INCREMENT,
-    messageId BIGINT NOT NULL PRIMARY KEY,
-    isRead BOOLEAN DEFAULT FALSE,
-    
-    PRIMARY KEY (messageStatusId, messageId),
-    
-    CONSTRAINT fk_MESSAGE_STATUSES_messageId
-    FOREIGN KEY (messageId)
-    REFERENCES messages(messageId)
-		ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS messages (
 	messageId BIGINT NOT NULL AUTO_INCREMENT,
     chatId INT NOT NULL,
@@ -90,6 +76,20 @@ CREATE TABLE IF NOT EXISTS messages (
     FOREIGN KEY (userEntryId)
     REFERENCES users_entries(userEntryId)
 		ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS messages_statuses (
+	messageStatusId BIGINT NOT NULL AUTO_INCREMENT,
+    messageId BIGINT NOT NULL PRIMARY KEY,
+    isRead BOOLEAN DEFAULT FALSE,
+    
+    PRIMARY KEY (messageStatusId, messageId),
+    
+    CONSTRAINT fk_MESSAGE_STATUSES_messageId
+    FOREIGN KEY (messageId)
+    REFERENCES messages(messageId)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 CREATE TRIGGER after_message_insert
