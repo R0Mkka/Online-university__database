@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS courses_items (
     creatorId INT NOT NULL,
     courseItemTitle NVARCHAR(60) NOT NULL,
     courseItemTextContent TEXT NOT NULL,
+    addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
     PRIMARY KEY(courseItemId),
     
