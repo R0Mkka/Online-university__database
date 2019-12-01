@@ -92,6 +92,37 @@ CREATE TABLE IF NOT EXISTS messages_statuses (
         ON DELETE CASCADE
 );
 
+DELIMITER //
+CREATE TRIGGER before_chat_delete
+BEFORE DELETE
+	ON chats FOR EACH ROW
+	BEGIN
+		DELETE
+        FROM users_chats
+        WHERE OLD.chatId = users_chats.chatId;
+        
+        DELETE
+        FROM messages
+        WHERE OLD.chatId = messages.chatId;
+	END;//
+
+DELIMITER //
+CREATE TRIGGER after_chat_delete
+AFTER DELETE
+	ON chats FOR EACH ROW
+	BEGIN
+		DELETE
+        FROM chats_images
+        WHERE OLD.chatImageId = chats_images.chatImageId;
+	END;//
+    
+CREATE TRIGGER before_message_delete
+BEFORE DELETE
+	ON messages FOR EACH ROW
+    DELETE
+    FROM messages_statuses
+    WHERE OLD.messageId = messages_statuses.messageId;
+
 CREATE TRIGGER after_message_insert
 AFTER INSERT
 	ON messages FOR EACH ROW

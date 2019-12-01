@@ -92,3 +92,31 @@ CREATE TABLE IF NOT EXISTS users_entries (
 		ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+    
+DELIMITER //
+CREATE TRIGGER before_users_delete
+BEFORE DELETE
+	ON users FOR EACH ROW
+	BEGIN
+		DELETE
+        FROM courses
+        WHERE OLD.userId = courses.courseOwnerId;
+        
+        DELETE
+        FROM chats
+        WHERE OLD.userId = chats.chatOwnerId;
+        
+        DELETE
+        FROM users_entries
+        WHERE OLD.userId = users_entries.userId;
+	END;//
+    
+DELIMITER //
+CREATE TRIGGER after_users_delete
+AFTER DELETE
+	ON users FOR EACH ROW
+	BEGIN
+		DELETE
+        FROM account_images
+        WHERE OLD.accountImageId = account_images.accountImageId;
+	END;//

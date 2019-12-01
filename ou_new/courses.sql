@@ -90,16 +90,44 @@ CREATE TABLE IF NOT EXISTS users_courses (
         ON DELETE CASCADE
 );
 
-CREATE TRIGGER remove_chat_after_course_delete
+DELIMITER //
+CREATE TRIGGER before_course_delete
+BEFORE DELETE
+	ON courses FOR EACH ROW
+    BEGIN
+		DELETE
+		FROM courses_items
+		WHERE OLD.courseId = courses_items.courseId;
+        
+        DELETE
+        FROM users_courses
+        WHERE OLD.courseId = users_courses.courseId;
+	END;//
+    
+DELIMITER //
+CREATE TRIGGER after_course_delete
 AFTER DELETE
-   ON courses FOR EACH ROW
-   DELETE
-   FROM chats
-   WHERE chatId = OLD.chatId;
-   
-CREATE TRIGGER remove_course_data_after_course_delete
+	ON courses FOR EACH ROW
+	BEGIN
+		DELETE
+        FROM courses_data
+        WHERE OLD.courseDataId = courses_data.courseDataId;
+        
+        DELETE
+        FROM chats
+        WHERE OLD.chatId = chats.chatId;
+	END;//
+    
+DELIMITER //
+CREATE TRIGGER after_courses_data_delete
 AFTER DELETE
-   ON courses FOR EACH ROW
-   DELETE
-   FROM courses_data
-   WHERE courseDataId = OLD.courseDataId;
+	ON courses_data FOR EACH ROW
+	BEGIN
+		DELETE
+        FROM courses_pictures
+        WHERE OLD.coursePictureId = courses_pictures.coursePictureId;
+        
+		DELETE
+        FROM courses_color_palettes
+        WHERE OLD.courseColorPaletteId = courses_color_palettes.courseColorPaletteId;
+	END;//
