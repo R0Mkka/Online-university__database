@@ -1,27 +1,27 @@
 USE online_university;
 
 CREATE TABLE IF NOT EXISTS courses_pictures (
-	coursePictureId SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	coursePictureId SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     pictureName VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS courses_color_palettes (
-	courseColorPaletteId SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	courseColorPaletteId SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     colorPaletteName VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS courses_data (
-	courseDataId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    coursePictureId SMALLINT,
-    courseColorPaletteId SMALLINT,
+	courseDataId INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    coursePictureId SMALLINT UNSIGNED,
+    courseColorPaletteId SMALLINT UNSIGNED,
     courseMode BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE IF NOT EXISTS courses (
-	courseId INT NOT NULL AUTO_INCREMENT,
-    courseDataId INT NOT NULL,
-    courseOwnerId INT NOT NULL,
-    chatId INT NOT NULL,
+	courseId INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    courseDataId INT UNSIGNED NOT NULL,
+    courseOwnerId INT UNSIGNED NOT NULL,
+    chatId INT UNSIGNED NOT NULL,
     courseName NVARCHAR(100) NOT NULL,
     courseGroupName NVARCHAR(30),
     courseDescription TEXT NOT NULL,
@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS courses (
 );
 
 CREATE TABLE IF NOT EXISTS courses_items (
-	courseItemId INT NOT NULL AUTO_INCREMENT,
-    courseId INT NOT NULL,
-    creatorId INT NOT NULL,
+	courseItemId INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    courseId INT UNSIGNED NOT NULL,
+    creatorId INT UNSIGNED NOT NULL,
     courseItemTitle NVARCHAR(60) NOT NULL,
     courseItemTextContent TEXT NOT NULL,
     addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS courses_items (
 );
 
 CREATE TABLE IF NOT EXISTS users_courses (
-	userId INT NOT NULL,
-    courseId INT NOT NULL,
+	userId INT UNSIGNED NOT NULL,
+    courseId INT UNSIGNED NOT NULL,
     joinedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     leftAt TIMESTAMP,
     
