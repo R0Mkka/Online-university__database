@@ -47,8 +47,18 @@ CREATE TABLE IF NOT EXISTS courses (
 		ON UPDATE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS courses_items_types (
+	courseItemTypeId TINYINT UNSIGNED NOT NULL PRIMARY KEY,
+    name VARCHAR(20) NOT NULL
+);
+
+INSERT INTO courses_items_types(courseItemTypeId, name)
+VALUES (1, 'studyMaterials'),
+	   (2, 'announcement');
+
 CREATE TABLE IF NOT EXISTS courses_items (
 	courseItemId INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    courseItemTypeId TINYINT UNSIGNED NOT NULL,
     courseId INT UNSIGNED NOT NULL,
     creatorId INT UNSIGNED NOT NULL,
     courseItemTitle NVARCHAR(60) NOT NULL,
@@ -56,6 +66,11 @@ CREATE TABLE IF NOT EXISTS courses_items (
     addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
     PRIMARY KEY(courseItemId),
+    
+    CONSTRAINT fk_CI_courseItemTypeId
+    FOREIGN KEY (courseItemTypeId)
+    REFERENCES courses_items_types(courseItemTypeId)
+		ON UPDATE CASCADE,
     
     CONSTRAINT fk_COURSES_ITEMS_courseId
     FOREIGN KEY (courseId)
@@ -67,6 +82,23 @@ CREATE TABLE IF NOT EXISTS courses_items (
 	FOREIGN KEY (creatorId)
     REFERENCES users(userId)
 		ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS courses_items_attachments (
+	courseItemAttachmentId INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    courseItemId INT UNSIGNED NOT NULL,
+    path VARCHAR(100) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    originalName NVARCHAR(50) NOT NULL,
+    mimeType VARCHAR(35) NOT NULL,
+    size INT NOT NULL,
+    addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    CONSTRAINT fk_CIA_courseItemId
+    FOREIGN KEY (courseItemId)
+    REFERENCES courses_items(courseItemId)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS users_courses (

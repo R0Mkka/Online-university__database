@@ -7,10 +7,19 @@ select * from users;
 select * from users_statuses;
 select * from courses;
 select * from courses_data;
+select * from courses_items;
 select * from users_chats;
 select * from chats;
 select * from days_of_the_week;
 select * from timetable_items;
+select * from courses_items_types;
+
+UPDATE timetable_items
+SET
+	userId = 1
+WHERE
+	timetableItemId = 3;
+
 
 ALTER TABLE courses MODIFY courseCode VARCHAR(20) NOT NULL UNIQUE;
 
@@ -23,8 +32,10 @@ DROP TABLE courses;
 DROP TABLE courses_data;
 
 DELETE
-FROM users_chats
-WHERE userId <> 2;
+FROM courses_items
+WHERE courseItemId > 0;
+
+TRUNCATE courses_items;
 
 select
 	*
