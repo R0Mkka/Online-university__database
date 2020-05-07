@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS courses_items (
     courseId INT UNSIGNED NOT NULL,
     creatorId INT UNSIGNED NOT NULL,
     courseItemTitle NVARCHAR(60) NOT NULL,
-    courseItemTextContent TEXT NOT NULL,
+    courseItemTextContent TEXT NULL,
+    isEdited BOOLEAN NULL DEFAULT FALSE,
     addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
     PRIMARY KEY(courseItemId),
@@ -90,7 +91,7 @@ CREATE TABLE IF NOT EXISTS courses_items_attachments (
     path VARCHAR(100) NOT NULL,
     name VARCHAR(50) NOT NULL,
     originalName NVARCHAR(50) NOT NULL,
-    mimeType VARCHAR(35) NOT NULL,
+    mimeType VARCHAR(100) NOT NULL,
     size INT NOT NULL,
     addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     

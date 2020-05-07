@@ -13,6 +13,12 @@ select * from chats;
 select * from days_of_the_week;
 select * from timetable_items;
 select * from courses_items_types;
+select * from courses_items_attachments;
+
+describe courses_items_attachments;
+
+ALTER TABLE courses_items_attachments
+MODIFY mimeType VARCHAR(100) NOT NULL;
 
 UPDATE timetable_items
 SET
@@ -57,3 +63,6 @@ where (SELECT MAX(userEntryId) from users_entries group by userId)
 group by userId;
 
 select * from users_entries group by userId order by enteredAt DESC;
+
+ALTER TABLE courses_items
+MODIFY courseItemTextContent TEXT NULL; 
