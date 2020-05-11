@@ -66,3 +66,10 @@ select * from users_entries group by userId order by enteredAt DESC;
 
 ALTER TABLE courses_items
 MODIFY courseItemTextContent TEXT NULL; 
+
+UPDATE
+        ${DBTables.CoursesItemsAttachments}
+      SET
+        isEdited = TRUE
+      WHERE
+        courseItemId = ?;

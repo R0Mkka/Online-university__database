@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS timetable_items (
     teacherFullName NVARCHAR(50) NOT NULL,
     onlineMeeting TEXT,
     classroom NVARCHAR(15),
+    comment TEXT NULL,
     startTime TIME NOT NULL,
     endTime TIME NOT NULL,
     
