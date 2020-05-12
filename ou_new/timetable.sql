@@ -1,7 +1,7 @@
 USE online_university;
 
 CREATE TABLE IF NOT EXISTS days_of_the_week (
-	dayOfTheWeekId TINYINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	dayOfTheWeekId TINYINT UNSIGNED NOT NULL PRIMARY KEY,
     name VARCHAR(15)
 );
 
@@ -93,11 +93,11 @@ CREATE TABLE IF NOT EXISTS timetable_items_timetable_items_stickers (
         ON DELETE CASCADE
 );
 
-INSERT INTO days_of_the_week (name)
-VALUES ('Monday'),
-	   ('Tuesday'),
-       ('Wednesday'),
-       ('Thursday'),
-       ('Friday'),
-       ('Saturday'),
-       ('Sunday');
+INSERT INTO days_of_the_week (dayOfTheWeekId, name)
+VALUES (0, 'Sunday'),
+	   (1, 'Monday'),
+	   (2, 'Tuesday'),
+       (3, 'Wednesday'),
+       (4, 'Thursday'),
+       (5, 'Friday'),
+       (6, 'Saturday');

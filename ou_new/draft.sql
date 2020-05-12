@@ -38,8 +38,8 @@ DROP TABLE courses;
 DROP TABLE courses_data;
 
 DELETE
-FROM courses_items
-WHERE courseItemId > 0;
+FROM days_of_the_week
+WHERE dayOfTheWeekId > 0;
 
 TRUNCATE courses_items;
 
