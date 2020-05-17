@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS timetable_item_groups (
 	timetableItemGroupId INT UNSIGNED NOT NULL AUTO_INCREMENT,
     userId INT UNSIGNED NOT NULL,
     name NVARCHAR(30) NOT NULL,
+    isPrivate BOOLEAN NULL DEFAULT TRUE,
     
     PRIMARY KEY (timetableItemGroupId),
     
@@ -21,15 +22,27 @@ CREATE TABLE IF NOT EXISTS timetable_item_groups (
 
 CREATE TABLE IF NOT EXISTS timetable_item_stickers (
 	timetableItemStickerId INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    userId INT UNSIGNED NOT NULL,
-    title NVARCHAR(30) NOT NULL,
+    title NVARCHAR(50) NOT NULL,
+    abbreviation NVARCHAR(3) NOT NULL,
     color VARCHAR(20) NOT NULL,
+    isCommon BOOLEAN NULL DEFAULT FALSE,
     
-    PRIMARY KEY (timetableItemStickerId),
+    PRIMARY KEY (timetableItemStickerId)
+);
+
+CREATE TABLE IF NOT EXISTS users_timetable_items_stickers (
+	userId INT UNSIGNED NOT NULL,
+    timetableItemStickerId INT UNSIGNED NOT NULL,
     
-    CONSTRAINT fk_TIS_userId
+    CONSTRAINT fk_UTIS_userId
     FOREIGN KEY (userId)
     REFERENCES users(userId)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE,
+        
+	CONSTRAINT fk_UTIS_timetableItemStickerId
+    FOREIGN KEY (timetableItemStickerId)
+    REFERENCES timetable_item_stickers(timetableItemStickerId)
 		ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -73,9 +86,6 @@ CREATE TABLE IF NOT EXISTS timetable_items (
         ON DELETE CASCADE
 );
 
-ALTER TABLE timetable_items
-ADD COLUMN teacherFullName NVARCHAR(50) NOT NULL;
-
 CREATE TABLE IF NOT EXISTS timetable_items_timetable_items_stickers (
 	timetableItemId INT UNSIGNED NOT NULL,
     timetableItemStickerId INT UNSIGNED NOT NULL,
@@ -101,3 +111,10 @@ VALUES (0, 'Sunday'),
        (4, 'Thursday'),
        (5, 'Friday'),
        (6, 'Saturday');
+       
+INSERT INTO timetable_item_stickers (title, color, abbreviation, isCommon)
+VALUES ('Лекция', '#0984E3', 'Лек', TRUE),
+	   ('Практика', '#6C5CE7', 'П', TRUE),
+	   ('Семинар', '#E84393', 'С', TRUE),
+       ('Лабораторная', '#3EB84F', 'Лаб', TRUE),
+       ('Факультатив', '#ff9721', 'Ф', TRUE);
