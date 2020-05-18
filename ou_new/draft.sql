@@ -8,12 +8,22 @@ select * from users_statuses;
 select * from courses;
 select * from courses_data;
 select * from courses_items;
+select * from courses_items_types;
 select * from users_chats;
 select * from chats;
 select * from days_of_the_week;
 select * from timetable_items;
 select * from courses_items_types;
 select * from courses_items_attachments;
+select * from timetable_item_stickers left join users_timetable_items_stickers using(timetableItemStickerId) where userId = 8 or isCommon = TRUE;
+select * from `timetable_items_timetable_items_stickers`;
+
+select * from timetable_item_stickers left join timetable_items_timetable_items_stickers using(timetableItemStickerId) left join users_timetable_items_stickers using(timetableItemStickerId) where timetableItemId = 4;
+
+truncate timetable_item_stickers;
+
+delete from timetable_item_stickers where timetableItemStickerId > 0;
+ALTER TABLE timetable_item_stickers AUTO_INCREMENT=1;
 
 describe courses_items_attachments;
 
@@ -68,8 +78,13 @@ ALTER TABLE courses_items
 MODIFY courseItemTextContent TEXT NULL; 
 
 UPDATE
-        ${DBTables.CoursesItemsAttachments}
-      SET
-        isEdited = TRUE
-      WHERE
-        courseItemId = ?;
+	timetable_item_groups
+SET
+	name = '123',
+    isPrivate = 1
+WHERE
+	userId = 8 AND `timetableItemGroupId` = 49;
+    
+DELETE
+FROM timetable_items_timetable_items_stickers
+WHERE timetableItemId > 0;

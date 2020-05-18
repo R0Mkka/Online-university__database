@@ -54,7 +54,8 @@ CREATE TABLE IF NOT EXISTS courses_items_types (
 
 INSERT INTO courses_items_types(courseItemTypeId, name)
 VALUES (1, 'studyMaterials'),
-	   (2, 'announcement');
+	   (2, 'announcement'),
+       (3, 'task');
 
 CREATE TABLE IF NOT EXISTS courses_items (
 	courseItemId INT UNSIGNED NOT NULL AUTO_INCREMENT,
