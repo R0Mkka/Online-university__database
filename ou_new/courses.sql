@@ -47,6 +47,25 @@ CREATE TABLE IF NOT EXISTS courses (
 		ON UPDATE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS courses_blocked_users (
+	courseId INT UNSIGNED NOT NULL,
+    userId INT UNSIGNED NOT NULL,
+    
+    PRIMARY KEY (courseId, userId),
+    
+    CONSTRAINT fk_CBU_courseId
+    FOREIGN KEY (courseId)
+    REFERENCES courses(courseId)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    
+    CONSTRAINT fk_CBU_userId
+    FOREIGN KEY (userId)
+    REFERENCES users(userId)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS courses_items_types (
 	courseItemTypeId TINYINT UNSIGNED NOT NULL PRIMARY KEY,
     name VARCHAR(20) NOT NULL
