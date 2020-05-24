@@ -18,6 +18,12 @@ select * from courses_items_attachments;
 select * from timetable_item_stickers left join users_timetable_items_stickers using(timetableItemStickerId) where userId = 8 or isCommon = TRUE;
 select * from `timetable_items_timetable_items_stickers`;
 select * from courses_blocked_users;
+select * from course_tasks;
+select * from course_task_attachments;
+
+DELETE
+FROM courses
+WHERE courseId = 10;
 
 select * from timetable_item_stickers left join timetable_items_timetable_items_stickers using(timetableItemStickerId) left join users_timetable_items_stickers using(timetableItemStickerId) where timetableItemId = 4;
 
